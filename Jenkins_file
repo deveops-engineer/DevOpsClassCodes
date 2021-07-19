@@ -76,7 +76,7 @@ pipeline {
             steps {
                 sshagent(['deploy_user']) {
                 // scp <src_file> username@IP:destincation_path
-             sh "scp -o StrictHostKeyChecking=no workspace/target/addressbook.war ec2-user@18.224.37.237:/opt/tomcat/webapps"
+             sh "scp -o StrictHostKeyChecking=no Package/target/addressbook.war ec2-user@18.224.37.237:/opt/tomcat/webapps"
              }
             }
         }
