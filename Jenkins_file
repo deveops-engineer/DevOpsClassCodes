@@ -12,7 +12,7 @@ pipeline {
             agent any
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/deveops-engineer/sample-spring-microservices.git'
+                git 'https://github.com/deveops-engineer/DevOpsClassCodes.git'
 
                 // Run Maven on a Unix agent.
                 sh "mvn compile"
@@ -62,7 +62,7 @@ pipeline {
            agent any
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/deveops-engineer/sample-spring-microservices.git'
+                git 'https://github.com/deveops-engineer/DevOpsClassCodes.git'
                 // Run Maven on a Unix agent.
                 sh "mvn package"
 
@@ -76,7 +76,7 @@ pipeline {
             steps {
                 sshagent(['deploy_user']) {
                 // scp <src_file> username@IP:destincation_path
-             sh "scp -o StrictHostKeyChecking=no target/addressbook.war ec2-user@18.224.37.237:/opt/tomcat/webapps"
+             sh "scp -o StrictHostKeyChecking=no DeveOps/target/addressbook.war ec2-user@18.224.37.237:/opt/tomcat/webapps"
              }
             }
         }
