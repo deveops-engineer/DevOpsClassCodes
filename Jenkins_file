@@ -58,7 +58,8 @@ pipeline {
             }
         }
           stage('Package') {
-            agent {label 'linux_slave1'}
+      //      agent {label 'linux_slave1'}
+           agent any
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/deveops-engineer/sample-spring-microservices.git'
@@ -67,6 +68,16 @@ pipeline {
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+        }
+        stage('deploy') {
+        //    agent {label 'linux_slave1'}
+              agent any 
+            steps {
+                sshagent(['deploy_user']) {
+                // scp <src_file> username@IP:destincation_path
+             sh "scp -o StrictHostKeyChecking=no webapp/target/addressbook.war ec2-user@18.224.37.237:/opt/tomcat/webapps"
+             }
             }
         }
     }
